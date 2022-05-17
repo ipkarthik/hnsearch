@@ -14,7 +14,7 @@ export default class Home extends Component{
         let that=this;
         let getStories=function(){
             console.log(that.state.page);
-            fetch("https://hn.algolia.com/api/v1/search?page="+that.state.page)
+            fetch("https://hn.algolia.com/api/v1/search?page="+that.state.page, {mode:'cors'})
             .then(response=>response.json())
             .then(data=>{
                 let filteredStories=data.hits.map(hit=>{
@@ -32,7 +32,7 @@ export default class Home extends Component{
 
         that.executeSearch=function(searchText){
             if(searchText){
-                fetch("https://hn.algolia.com/api/v1/search?query="+searchText)
+                fetch("https://hn.algolia.com/api/v1/search?query="+searchText, {mode:'cors'})
                 .then(response=>response.json())
                 .then(data=>{
                     let filteredStories=data.hits.map(hit=>{

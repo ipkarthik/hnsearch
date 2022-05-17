@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams, Navigate} from "react-router-dom";
+import { useParams} from "react-router-dom";
+import loader from "./loading.gif";
 
 
 export default function Detail(props){ 
@@ -31,19 +32,30 @@ export default function Detail(props){
                     <h1>HackerNews</h1>
                 </div>
             </div>
-            <div className="row">
-                <div className="col">
-                    <p>{story.points} points</p>
-                </div>
-                <div className="col">
-                    <a href={story.url}>{story.title}</a>
-                </div>
-            </div>
-            <div className="row">
-                <div className="col">
-
-                </div>
-            </div>
+            {
+                story.points?(
+                    <div>
+         
+                    <div className="row">
+                        <div className="col">
+                            <p>{story.points} points</p>
+                        </div>
+                        <div className="col">
+                            <a className="text-decoration-none link-primary" href={story.url}>{story.title}</a>
+                        </div>
+                    </div>
+                    <div className="row">
+                        comments:
+                        <div className="col">
+                            
+                        </div>
+                    </div>
+        
+                    </div>
+                ):(
+                    <img src={loader} className="img-fluid" alt="Responsive image"/>
+                )
+            }
             <div className="row">
                 <div className="col">
                     <a href="/">back</a>
