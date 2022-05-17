@@ -12,6 +12,7 @@ export default class Home extends Component{
     componentDidMount(){
         let that=this;
         let getStories=function(){
+            console.log(that.state.page);
             fetch("https://hn.algolia.com/api/v1/search?page="+that.state.page)
             .then(response=>response.json())
             .then(data=>{
@@ -48,13 +49,27 @@ export default class Home extends Component{
                 getStories()
             }
         }
+
+        that.increasePage=function(e){
+            that.setState({
+                page: that.state.page+1
+            });
+            getStories();
+        }
+
+        that.decreasePage=function(e){
+            that.setState({
+                page: that.state.page-1
+            });
+            getStories();
+        }
     }
 
     render(){
-        this.listItems=this.state.stories.map((story,i)=>{
+        this.listItems=this.state.stories.map((story, i)=>{
             if(story){
                 return (<li className="list-group-item" key={i}>
-                            <a href={story.url || "#"} class="link-secondary text-decoration-none">{story.title}</a>
+                            <a href={story.url || "#"} className="link-secondary text-decoration-none">{story.title}</a>
                         </li>);
             }
         });
@@ -72,16 +87,21 @@ export default class Home extends Component{
                 </div>
                 <div className="row">
                     <div className="col">
-                        <ol className="list-group list-group-numbered" id="stories-list">
+                        <ol className="list-group list-group-flush" id="stories-list">
                             {this.listItems}
                         </ol>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col">
-                        <a href="#" className="link-primary" id="next-link">next</a>
-                        <a href="#" className="link-primary" id="previous-link">previous</a>
-                    </div>
+                    {this.state.page}
+                    {this.state.page==1 ? 
+                    (<div className="col">
+                        <a href="#" className="link-primary" id="next-link" onClick={this.increasePage}>next</a>
+                    </div>):
+                    (<div className="col">
+                        <a href="#" className="link-primary" id="next-link" onClick={this.increasePage}>next</a>
+                        <a href="#" className="link-primary" id="previous-link" onClick={this.decreasePage}>previous</a>
+                    </div>)}
                 </div>
                 <div className="row">
                     <div className="col">
