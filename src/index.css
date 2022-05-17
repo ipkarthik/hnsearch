@@ -7,3 +7,11 @@
 #stories-list{
   margin:10px;
 }
+
+#next-link, #previous-link{
+  margin: 10px;
+}
+
+#footer{
+  margin-top: 20px;
+}

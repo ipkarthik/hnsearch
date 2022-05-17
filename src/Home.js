@@ -5,59 +5,87 @@ export default class Home extends Component{
         super(props);
         this.state={
             stories: [],
-            filteredStories: []
+            page: 1
         }
     }
 
     componentDidMount(){
         let that=this;
         let getStories=function(){
-            fetch("https://hn.algolia.com/api/v1/search?tags=front_page")
+            fetch("https://hn.algolia.com/api/v1/search?page="+that.state.page)
             .then(response=>response.json())
             .then(data=>{
+                let filteredStories=data.hits.map(hit=>{
+                    if(hit.title){
+                        return hit;
+                    }
+                });
+                console.log(filteredStories)
                 that.setState({
-                    stories: data.hits,
-                    filteredStories: data.hits
+                    stories: filteredStories
                 })
             })
-            
         }
         getStories();
 
         that.executeSearch=function(searchText){
-            let filteredStories=[];
-            for(let i=0;i<that.state.stories.length;i++){
-                if(that.state.stories[i]&&that.state.stories[i].title.toLowerCase().indexOf(searchText)!==-1){
-                    filteredStories.push(that.state.stories[i]);
-                }
+            if(searchText){
+                fetch("https://hn.algolia.com/api/v1/search?query="+searchText)
+                .then(response=>response.json())
+                .then(data=>{
+                    let filteredStories=data.hits.map(hit=>{
+                        if(hit.title){
+                            return hit;
+                        }
+                    })
+                    console.log(filteredStories);
+                    that.setState({
+                        stories: filteredStories
+                    })
+                })
             }
-            that.setState({
-                filteredStories: filteredStories
-            });
+            else{
+                getStories()
+            }
         }
     }
 
     render(){
-        this.listItems=this.state.filteredStories.map((story,i)=>{
-            return (<li className="list-group-item" key={i}>{story.title}</li>);
+        this.listItems=this.state.stories.map((story,i)=>{
+            if(story){
+                return (<li className="list-group-item" key={i}>
+                            <a href={story.url || "#"} class="link-secondary text-decoration-none">{story.title}</a>
+                        </li>);
+            }
         });
         return(
             <div className="container">
                 <div className="row">
-                    <div className="column">
+                    <div className="col">
                         <h1>HackerNews</h1>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="column">
+                    <div className="col">
                         <input id="search-query" className="form-control form-control-lg" type="text" placeholder="Enter search query" aria-label="search query" onChange={e=>this.executeSearch(e.target.value)}/>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="column">
-                        <ul className="list-group" id="stories-list">
+                    <div className="col">
+                        <ol className="list-group list-group-numbered" id="stories-list">
                             {this.listItems}
-                        </ul>
+                        </ol>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col">
+                        <a href="#" className="link-primary" id="next-link">next</a>
+                        <a href="#" className="link-primary" id="previous-link">previous</a>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col">
+                        <h6 id="footer" className="text-center">&copy; 2022</h6>
                     </div>
                 </div>
             </div>
