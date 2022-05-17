@@ -4,7 +4,8 @@ export default class Home extends Component{
     constructor(props){
         super(props);
         this.state={
-            stories: []
+            stories: [],
+            filteredStories: []
         }
     }
 
@@ -15,7 +16,8 @@ export default class Home extends Component{
             .then(response=>response.json())
             .then(data=>{
                 that.setState({
-                    stories: data.hits
+                    stories: data.hits,
+                    filteredStories: data.hits
                 })
             })
             
@@ -23,21 +25,20 @@ export default class Home extends Component{
         getStories();
 
         that.executeSearch=function(searchText){
-            console.log(searchText);
             let filteredStories=[];
             for(let i=0;i<that.state.stories.length;i++){
-                if(that.state.stories[i]&&that.state.stories[i].title.indexOf(searchText)!==-1){
+                if(that.state.stories[i]&&that.state.stories[i].title.toLowerCase().indexOf(searchText)!==-1){
                     filteredStories.push(that.state.stories[i]);
                 }
             }
             that.setState({
-                stories: filteredStories
-            })
+                filteredStories: filteredStories
+            });
         }
     }
 
     render(){
-        this.listItems=this.state.stories.map((story,i)=>{
+        this.listItems=this.state.filteredStories.map((story,i)=>{
             return (<li className="list-group-item" key={i}>{story.title}</li>);
         });
         return(
