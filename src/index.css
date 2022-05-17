@@ -8,10 +8,14 @@
   margin:10px;
 }
 
-#next-link, #previous-link{
+#next-link, #previous-link, #back-link{
   margin: 10px;
 }
 
 #footer{
   margin-top: 20px;
+}
+
+#loader-image{
+  margin: 10px;
 }

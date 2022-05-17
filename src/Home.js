@@ -69,9 +69,6 @@ export default class Home extends Component{
     render(){
         this.listItems=this.state.stories.map((story, i)=>{
             if(story){
-                // return (<li className="list-group-item" key={i}>
-                //             <a href={story.url || "#"} className="link-secondary text-decoration-none">{story.title}</a>
-                //         </li>);
                 return (<li className="list-group-item" key={i}>
                             <Link to={"detail/"+story.objectID} className="link-secondary text-decoration-none">{story.title}</Link>
                         </li>);
