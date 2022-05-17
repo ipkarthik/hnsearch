@@ -31,15 +31,15 @@ export default function Detail(props){
         <div className="container">
             <div className="row">
                 <div className="col">
-                    <h1>HackerNews</h1>
+                    <h1 id="app-title">HackerNews</h1>
                 </div>
             </div>
             {
                 story.points?(
                     <div>
                         <div className="row">
-                            <div className="col">
-                                <p className="text-center" id="story-points"><b>{story.points} points</b></p>
+                            <div className="col-1">
+                                <p id="story-points"><b>{story.points} points</b></p>
                             </div>
                             <div className="col">
                                 <a id="story-title" className="text-decoration-none link-primary" href={story.url}><b>{story.title}</b></a>

@@ -20,6 +20,14 @@
   margin: 10px;
 }
 
-#story-points, #story-title, #comments-list{
+#story-title, #comments-list{
   margin: 10px;
+}
+
+#app-title{
+  color: orange;
+}
+
+#story-points{
+  margin: 0;
 }

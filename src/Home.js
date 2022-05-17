@@ -75,7 +75,7 @@ export default class Home extends Component{
             <div className="container">
                 <div className="row">
                     <div className="col">
-                        <h1>HackerNews</h1>
+                        <h1 id="app-title">HackerNews</h1>
                     </div>
                 </div>
                 <div className="row">
@@ -97,8 +97,8 @@ export default class Home extends Component{
                         <a href="#" className="link-primary" id="next-link" onClick={this.increasePage}>next</a>
                     </div>):
                     (<div className="col">
-                        <a href="#" className="link-primary" id="next-link" onClick={this.increasePage}>next</a>
                         <a href="#" className="link-primary" id="previous-link" onClick={this.decreasePage}>previous</a>
+                        <a href="#" className="link-primary" id="next-link" onClick={this.increasePage}>next</a>
                     </div>)}
                 </div>
                 <div className="row">
