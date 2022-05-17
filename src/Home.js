@@ -80,7 +80,7 @@ export default class Home extends Component{
                 </div>
                 <div className="row">
                     <div className="col">
-                        <input id="search-query" className="form-control form-control-lg" type="text" placeholder="Enter search query" aria-label="search query" onChange={e=>this.executeSearch(e.target.value)}/>
+                        <input id="search-query" className="form-control form-control-lg" type="text" placeholder="Search" aria-label="search query" onChange={e=>this.executeSearch(e.target.value)}/>
                     </div>
                 </div>
                 <div className="row">
