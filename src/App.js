@@ -1,9 +1,18 @@
 import './App.css';
 import Home from './Home';
+import Detail from './Detail';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
   return (
-    <Home></Home>
+    <div>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home/>}/>
+          <Route exact path="/detail" element={<Detail/>}/>
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

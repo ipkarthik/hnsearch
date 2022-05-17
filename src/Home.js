@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class Home extends Component{
     constructor(props){
         super(props);
         this.state={
             stories: [],
-            page: 1
+            page: 1,
         }
     }
 
@@ -41,7 +42,7 @@ export default class Home extends Component{
                     })
                     console.log(filteredStories);
                     that.setState({
-                        stories: filteredStories
+                        stories: filteredStories,
                     })
                 })
             }
@@ -52,14 +53,14 @@ export default class Home extends Component{
 
         that.increasePage=function(e){
             that.setState({
-                page: that.state.page+1
+                page: that.state.page+1,
             });
             getStories();
         }
 
         that.decreasePage=function(e){
             that.setState({
-                page: that.state.page-1
+                page: that.state.page-1,
             });
             getStories();
         }
@@ -68,8 +69,11 @@ export default class Home extends Component{
     render(){
         this.listItems=this.state.stories.map((story, i)=>{
             if(story){
+                // return (<li className="list-group-item" key={i}>
+                //             <a href={story.url || "#"} className="link-secondary text-decoration-none">{story.title}</a>
+                //         </li>);
                 return (<li className="list-group-item" key={i}>
-                            <a href={story.url || "#"} className="link-secondary text-decoration-none">{story.title}</a>
+                            <Link to="/detail" className="link-secondary text-decoration-none">{story.title}</Link>
                         </li>);
             }
         });
