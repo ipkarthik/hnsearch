@@ -1,20 +1,21 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 
-export default class Home extends Component{
-    constructor(props){
-        super(props);
-    }
+export default function Detail(props){ 
+    let {id} = useParams();
 
-    componentDidMount(){
-        let that=this;
-        
-    }
+    useEffect(()=>{
+        console.log(`${id}`);
+    }, []);
 
-    render(){
-       return(
-           <div>hello</div>
-       )
-    }
+    return(
+        <div className="container">
+            <div className="row">
+                <div className="col">
+                    <h1>HackerNews</h1>
+                </div>
+            </div>
+        </div>
+    );
 }

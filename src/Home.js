@@ -73,7 +73,7 @@ export default class Home extends Component{
                 //             <a href={story.url || "#"} className="link-secondary text-decoration-none">{story.title}</a>
                 //         </li>);
                 return (<li className="list-group-item" key={i}>
-                            <Link to="/detail" className="link-secondary text-decoration-none">{story.title}</Link>
+                            <Link to={"detail/"+story.objectID} className="link-secondary text-decoration-none">{story.title}</Link>
                         </li>);
             }
         });
