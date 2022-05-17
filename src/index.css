@@ -19,3 +19,7 @@
 #loader-image{
   margin: 10px;
 }
+
+#story-points, #story-title, #comments-list{
+  margin: 10px;
+}

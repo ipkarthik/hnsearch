@@ -15,14 +15,12 @@ export default function Detail(props){
             try{
                 const response=await fetch(url,{mode: "cors"});
                 const json=await response.json();
-                console.log(json);
                 setStory(json);
                 setComments(json.children.map((comment, j)=>{
                     return (<li className="list-group-item" key={j}>{comment.author + ": " + comment.text}</li>); 
                 }));
             }
             catch(error){
-                console.log("error", error);
             }
         };
 
@@ -41,10 +39,10 @@ export default function Detail(props){
                     <div>
                         <div className="row">
                             <div className="col">
-                                <p>{story.points} points</p>
+                                <p className="text-center" id="story-points"><b>{story.points} points</b></p>
                             </div>
                             <div className="col">
-                                <a className="text-decoration-none link-primary" href={story.url}>{story.title}</a>
+                                <a id="story-title" className="text-decoration-none link-primary" href={story.url}><b>{story.title}</b></a>
                             </div>
                         </div>
                         <div className="row">

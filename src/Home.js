@@ -13,7 +13,6 @@ export default class Home extends Component{
     componentDidMount(){
         let that=this;
         let getStories=function(){
-            console.log(that.state.page);
             fetch("https://hn.algolia.com/api/v1/search?page="+that.state.page, {mode:'cors'})
             .then(response=>response.json())
             .then(data=>{
@@ -22,7 +21,6 @@ export default class Home extends Component{
                         return hit;
                     }
                 });
-                console.log(filteredStories)
                 that.setState({
                     stories: filteredStories
                 })
@@ -40,7 +38,6 @@ export default class Home extends Component{
                             return hit;
                         }
                     })
-                    console.log(filteredStories);
                     that.setState({
                         stories: filteredStories,
                     })
