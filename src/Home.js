@@ -21,6 +21,19 @@ export default class Home extends Component{
             
         }
         getStories();
+
+        that.executeSearch=function(searchText){
+            console.log(searchText);
+            let filteredStories=[];
+            for(let i=0;i<that.state.stories.length;i++){
+                if(that.state.stories[i]&&that.state.stories[i].title.indexOf(searchText)!==-1){
+                    filteredStories.push(that.state.stories[i]);
+                }
+            }
+            that.setState({
+                stories: filteredStories
+            })
+        }
     }
 
     render(){
@@ -31,12 +44,17 @@ export default class Home extends Component{
             <div className="container">
                 <div className="row">
                     <div className="column">
-                        <input className="form-control form-control-lg" type="text" placeholder="Enter search query" aria-label="search query"/>
+                        <h1>HackerNews</h1>
                     </div>
                 </div>
                 <div className="row">
                     <div className="column">
-                        <ul className="list-group">
+                        <input id="search-query" className="form-control form-control-lg" type="text" placeholder="Enter search query" aria-label="search query" onChange={e=>this.executeSearch(e.target.value)}/>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="column">
+                        <ul className="list-group" id="stories-list">
                             {this.listItems}
                         </ul>
                     </div>

@@ -1,1 +1,9 @@
 @import "./../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+#search-query{
+  margin: 10px;
+}
+
+#stories-list{
+  margin:10px;
+}
